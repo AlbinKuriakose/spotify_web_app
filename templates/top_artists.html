@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top artists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}">
+
+    <style>
+
+    </style>
+
+</head>
+<body>
+    <header class = 'header'>
+        <div class = 'backToMenu'>
+            <a href="/backToMain" class = "menuOption"> menu</a>
+        </div>
+        <nav class = 'navbar'>
+            <a href="/showTracksShort" class = 'options {%if type == 2%}edit{%endif%}'>top tracks</a>
+
+            <a href="/showArtistsShort" class = 'options {%if type == 1%}edit{%endif%} '>top artists</a>
+
+            <a href="/playlistCreator" class = 'options {%if type == 3%}edit{%endif%} '>playlist creator</a>
+
+        </nav>
+    </header>
+    <div class = 'emptyDiv'> 
+
+        <a href="/showArtistsShort" class = 'lengthOption {%if id == 1%}edit{%endif%}' >last 4 weeks</a>
+
+        <a href="/showArtistsMed" class = 'lengthOption {%if id == 2%}edit{%endif%}' >  last 6 months </a>
+
+        <a href="/showArtistsLong" class = 'lengthOption {%if id == 3%}edit{%endif%}'  >  last 1 year</a>
+ 
+        
+    </div>
+    <div class="topArtistsTracks">
+        <ul class = 'images'>
+                {% for artist in artists%}
+                <div class = 'imgBox'> <img src="{{artist.images[0].url}}" width="300" height="300"><p class = 'number'>{{artist.name}}</p> </div>
+                {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        // JavaScript to dynamically prepend numbers to the artist names
+        document.addEventListener('DOMContentLoaded', () => {
+            const numberElements = document.querySelectorAll('.number');
+
+            numberElements.forEach((numberElement, index) => {
+                // Prepend the number to the existing text content
+                numberElement.textContent = (index + 1) + '.' +  ' ' + numberElement.textContent;
+            });
+        });
+
+        const options = document.querySelectorAll('.lengthOption');
+    const selectedOption = localStorage.getItem('selectedOption');
+
+    // If an option was previously selected, apply the 'active' class
+    if (selectedOption) {
+        document.querySelector(`.lengthOption[data-id="${selectedOption}"]`).classList.add('active');
+    }
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            // Remove the 'active' class from all options
+            options.forEach(opt => opt.classList.remove('active'));
+
+            // Add the 'active' class to the clicked option
+            option.classList.add('active');
+
+            // Store the selected option's data-id in localStorage
+            localStorage.setItem('selectedOption', option.getAttribute('data-id'));
+        });
+    });
+    </script>
+
+</body>
+</html>

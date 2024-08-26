@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}">
+    <title>Playlist created</title>
+
+    <style>
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Monserrat', sans-serif ;
+}
+body{
+    min-height: 100vh;
+    background-color: black;
+}
+
+.header{
+    top:0;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    background-color: black ;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.navbar{
+    width: 50%;
+    color: white;
+    display:flex;
+    justify-content: space-evenly;
+} 
+
+.backToMenu{
+    width:50%;
+    color: white;
+    display:flex;
+} 
+
+.menuOption{
+    color:white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    position: relative;
+    margin-left: 55px;
+    transition:.3s;
+}
+
+.menuOption:hover{
+    font-weight:900;
+}
+
+
+.options{
+    color:white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    position: relative;
+    margin-right: 16px;
+}
+
+.options::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    width: 0%;
+    height: 100%;
+    height: 4px;
+    background-color: black;
+    transform: .3s;
+}
+
+.options:hover:before{
+    transition: .3s;
+    background-color: #1ED760;
+    width: 100%;
+}
+.playlistLink{
+    color: white;
+    font-size: 2em;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.playlistLink:hover{
+    transition: .3s;
+    font-size: 2.5em;
+}
+
+.linkDiv{
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header class = 'header'>
+        <div class = 'backToMenu'>
+            <a href="/backToMain" class = "menuOption"> menu</a>
+        </div>
+        <nav class = 'navbar'>
+            <a href="/showTracksShort" class = 'options {%if type == 2%}edit{%endif%}'>top tracks</a>
+
+            <a href="/showArtistsShort" class = 'options {%if type == 1%}edit{%endif%} '>top artists</a>
+
+            <a href="/playlistCreator" class = 'options {%if type == 3%}edit{%endif%} '>playlist creator</a>
+
+        </nav>
+    </header>
+
+    <div class = 'emptyDiv'> </div>
+
+
+    <div class = 'linkDiv'><a href="{{playlist_link}}" target = '_blank' class = 'playlistLink'> click here to visit your created playlist!</a>
+    </div>
+    
+</body>
+</html>

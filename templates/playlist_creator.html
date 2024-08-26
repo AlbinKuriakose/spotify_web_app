@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Monserrat', sans-serif ;
+}
+body{
+    min-height: 100vh;
+    background-color: black;
+}
+
+.header{
+    top:0;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    background-color: black ;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.navbar{
+    width: 50%;
+    color: white;
+    display:flex;
+    justify-content: space-evenly;
+} 
+
+.backToMenu{
+    width:50%;
+    color: white;
+    display:flex;
+} 
+
+.menuOption{
+    color:white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    position: relative;
+    margin-left: 55px;
+    transition:.3s;
+}
+
+.menuOption:hover{
+    font-weight:900;
+}
+
+
+.options{
+    color:white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    position: relative;
+    margin-right: 16px;
+}
+
+.options::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    width: 0%;
+    height: 100%;
+    height: 4px;
+    background-color: black;
+}
+
+.options:hover:before{
+    transition: .3s;
+    background-color: #1ED760;
+    width: 100%;
+}
+
+
+.emptyDiv{
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    font-size: 1.4em;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+
+}
+.searchBarDiv{
+
+    display: flex;
+    justify-content: center;
+}
+.searchBarInput{
+    height: 27px;
+    width: 300px;
+    border: none;
+    border-bottom: .5px solid white;
+    background-color: transparent;
+    margin-right: 3px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: larger;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.searchBarInput:focus{
+    transition: .075s;
+    outline: none;
+    border-bottom: 2px solid #1ED760;
+}
+
+.searchBarInput::placeholder{
+    letter-spacing: 2px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+}
+
+.form{
+    margin-top: -65px;
+}
+.selectionDiv{
+
+    width: 450px; /* this should be 250 originally */
+    margin-left: 500px;
+    display: flex;
+    margin-top: 30px;
+    height: 360px ;
+    overflow-y: auto;
+}
+.choicesUL{
+    width: 100%;
+}
+.choiceBox{
+    width: 50%;
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Monserrat', sans-serif ;
+    margin-bottom: 5px;
+}
+
+
+.choiceBox:hover{
+    transition:.3s;
+    background-color: rgb(102,102,102);
+    cursor: pointer;
+}
+.choiceBox.selected{
+    background-color: #1ED760;
+}
+
+.trackInfo{
+    margin-left: 10px;
+    color: white;
+    font-family: 'Monserrat', sans-serif;
+    font-weight: 200;
+    font-size: 1em;
+}
+.continue{
+
+    z-index: 1000;
+    margin-left: 15px;
+    position: relative;
+    font-family: 'Monserrat', sans-serif;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 7px;
+    color: black;
+    font-size: 1em;
+    cursor: default;
+    pointer-events: none;
+}
+
+.continue.selected{
+    transition: 1s;
+    color: white;
+    pointer-events: auto;
+}
+.continue.selected:hover{
+    transition: .1s;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+.biggestDiv{
+    display: flex;
+    align-items: center;
+}
+
+.continueWrap{
+    cursor: default;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header class = 'header'>
+        <div class = 'backToMenu'>
+            <a href="/backToMain" class = "menuOption"> menu</a>
+        </div>
+        <nav class = 'navbar'>
+            <a href="/showTracksShort" class = 'options {%if type == 2%}edit{%endif%}'>top tracks</a>
+
+            <a href="/showArtistsShort" class = 'options {%if type == 1%}edit{%endif%} '>top artists</a>
+            <a href="/playlistCreator" class = 'options {%if type == 3%}edit{%endif%} '>playlist creator</a>
+
+        </nav>
+    </header>
+    <div class = 'emptyDiv'> </div>
+
+    <form action="/searchData" class = 'form' method = 'POST'>
+        <div class = 'searchBarDiv'>
+        <input class = 'searchBarInput' type = 'search' name = 'track_name' placeholder="search by track name..." value = '{{track}}'>
+        <button type="submit"> submit</button>
+        </div>
+    </form>
+
+<form id = 'trackSelectionForm' action  = '/makePlaylist' method="POST">
+    <input type="hidden" name="track_id" id="selectedTrackId">
+    <div class = 'selectionDiv'>
+        <ul class = 'choicesUL'>
+            {% for result in results%}
+            <div class = 'biggestDiv' >
+                <div class = 'choiceBox' data-track-id = '{{result.id}}'> 
+                    <img src="{{result.album.images[0].url}}" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="/makePlaylist" class = 'continueWrap' style="text-decoration: none; pointer-events: none; cursor: default;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+            {% endfor %}
+             <!--{% for result in results%}
+            <div class = 'choiceBox'> 
+                <img src="{{result.album.images[0].url}}" alt="brother" width='75' height = '75'> 
+                <p class = 'trackInfo'> {{result.name}}</p> 
+            </div>
+
+            <div class = 'biggestDiv'>
+                <div class = 'choiceBox'> 
+                    <img src="Yeat.jpg" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="" style="text-decoration: none;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+            <div class = 'biggestDiv' >
+                <div class = 'choiceBox'> 
+                    <img src="Yeat.jpg" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="" style="text-decoration: none;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+            <div class = 'biggestDiv' >
+                <div class = 'choiceBox'> 
+                    <img src="Yeat.jpg" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="" style="text-decoration: none;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+            <div class = 'biggestDiv' >
+                <div class = 'choiceBox'> 
+                    <img src="Yeat.jpg" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="" style="text-decoration: none;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+            <div class = 'biggestDiv' >
+                <div class = 'choiceBox'> 
+                    <img src="Yeat.jpg" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="" style="text-decoration: none;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+            <div class = 'biggestDiv' >
+                <div class = 'choiceBox'> 
+                    <img src="Yeat.jpg" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="" style="text-decoration: none;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+            <div class = 'biggestDiv' >
+                <div class = 'choiceBox'> 
+                    <img src="Yeat.jpg" alt="brother" width='75' height = '75'> 
+                    <p class = 'trackInfo'> {{result.name}}</p> 
+                </div>
+                <a href="/makePlaylist" class = 'continueWrap' style="text-decoration: none; pointer-events: none; cursor: default;"> <div class = 'continue'> make playlist</div></a>
+            </div>
+                        {% endfor %} -->
+        </ul>
+    </div>
+    </form>
+
+    <script>
+
+/*document.addEventListener('DOMContentLoaded', () => {
+    const choiceBoxes = document.querySelectorAll('.choiceBox');
+    
+    choiceBoxes.forEach(choiceBox => {
+        choiceBox.addEventListener('click', () => {
+            // Remove the 'selected' class from all choiceBoxes
+            choiceBoxes.forEach(box => box.classList.remove('selected'));
+            
+            // Add the 'selected' class to the clicked choiceBox
+            choiceBox.classList.add('selected');
+        });
+    });
+});  */
+
+/*
+document.addEventListener('DOMContentLoaded', () => {
+    const biggestDivs = document.querySelectorAll('.biggestDiv');
+    
+    biggestDivs.forEach(div => {
+        div.addEventListener('click', () => {
+            // Remove 'selected' class from all choiceBoxes and continue buttons
+            biggestDivs.forEach(div => {
+                div.querySelector('.choiceBox').classList.remove('selected');
+                div.querySelector('.continue').classList.remove('selected');
+            });
+            
+            // Add 'selected' class to the clicked choiceBox and its continue button
+            div.querySelector('.choiceBox').classList.add('selected');
+            div.querySelector('.continue').classList.add('selected');
+        });
+    });
+}); */
+document.addEventListener('DOMContentLoaded', () => {
+    const biggestDivs = document.querySelectorAll('.biggestDiv');
+    const trackSelectionForm = document.getElementById('trackSelectionForm');
+    const selectedTrackIdInput = document.getElementById('selectedTrackId');
+
+    biggestDivs.forEach(div => {
+        div.addEventListener('click', () => {
+            // Remove 'selected' class from all choiceBoxes and continue buttons
+            biggestDivs.forEach(div => {
+                div.querySelector('.choiceBox').classList.remove('selected');
+                div.querySelector('.continue').classList.remove('selected');
+            });
+
+            // Add 'selected' class to the clicked choiceBox and its continue button
+            const choiceBox = div.querySelector('.choiceBox');
+            choiceBox.classList.add('selected');
+            div.querySelector('.continue').classList.add('selected');
+
+            // Update the hidden input with the selected track_id
+            const trackId = choiceBox.getAttribute('data-track-id');
+            selectedTrackIdInput.value = trackId;
+        });
+
+        div.querySelector('.continueWrap').addEventListener('click', (event) => {
+            event.preventDefault();
+            if (selectedTrackIdInput.value) {
+                trackSelectionForm.submit();
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+    </script>
+ 
+</body>
+</html>

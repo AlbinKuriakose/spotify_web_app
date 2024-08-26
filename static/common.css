@@ -1,0 +1,179 @@
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Monserrat', sans-serif ;
+}
+body{
+    min-height: 100vh;
+    background-color: black;
+
+}
+
+/*.header{
+    top:0;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    background-color: black ;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.navbar{
+    width: 100%;
+    position: fixed;
+    color: white;
+    display:flex;
+    justify-content: space-evenly;
+} */
+
+
+.header{
+    top:0;
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    background-color: black ;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.navbar{
+    width: 50%;
+    color: white;
+    display:flex;
+    justify-content: space-evenly;
+} 
+
+.backToMenu{
+    width:50%;
+    color: white;
+    display:flex;
+} 
+
+.menuOption{
+    color:white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    position: relative;
+    margin-left: 55px;
+    transition:.3s;
+}
+
+.menuOption:hover{
+    font-weight:900;
+
+}
+
+
+.options{
+    color:white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    position: relative;
+    margin-right: 16px;
+}
+
+
+.options::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    width: 0%;
+    height: 100%;
+    height: 4px;
+    background-color: black;
+}
+
+.options:hover:before{
+    transition: .3s;
+    background-color: #1ED760;
+    width: 100%;
+}
+
+
+.emptyDiv{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    font-size: 1.4em;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+
+}
+
+.lengthOption{
+    text-decoration: none;
+    margin-top: 150px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    transition: .3s ;
+}
+
+.lengthOption:hover,
+.lengthOption.active {
+    font-size: 2.4em;
+}
+
+.edit{
+    color: #1ED760;
+}
+
+.images{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 1200px;
+    row-gap: 100px;
+}
+img{
+    font-family:'Monserrat', sans-serif;
+    text-align: center;
+}
+
+.topArtistsTracks{
+    font-family:'Monserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-left: 6px;
+}
+.imgBox{
+    font-family:'Monserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    
+}
+
+.number{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    display: inline-block;
+    margin-top: 10px;
+    color: white;
+    overflow: hidden;
+}
+
+
+
+

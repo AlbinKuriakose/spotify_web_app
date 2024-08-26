@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0; /* Remove default margin */
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .text {
+            display: inline-block; /* Inline-block to handle width */
+            overflow: hidden; /* Hide overflow */
+            white-space: nowrap; /* Prevent text wrapping */
+            border-right: 2px solid; /* Cursor effect */
+            animation: typing 1.5s steps(20, end), blink-caret .75s  step-end infinite; /* Animation effects */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 5em;
+            color: white;
+            z-index: 2;
+        }
+
+        .loginButton {
+            width: 25px; /* Adjust size for the "period" */
+            height: 25px;
+            background-color: #1ED760;
+            border-radius: 50%; /* Make the button circular */
+            border: none; /* Remove the default button border */
+            display: inline-block;/* Align with the text */
+            margin-left: -20px; /* Small space between text and "period" */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            opacity: 0; /* Start as invisible */
+            animation: fadeIn 1s ease-in-out forwards,  bounce .75s infinite; /* Fade in animation */
+            animation-delay: .3s; /* Delay to start after the text has been typed */
+        }
+        .loginButton:hover{
+            background-color: white;
+            z-index: 1;
+        }
+
+        @keyframes typing {
+            from { width: 0; } /* Start from 0 width */
+            to { width: 100%; } /* End at full width */
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; } /* Invisible caret */
+            50% { border-color: white; } /* Visible caret */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; } /* Start as invisible */
+            to { opacity: 1; } /* End as fully visible */
+        }
+
+        @keyframes bounce {
+            0% {
+                 transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px); /* Adjust the -5px value for the bounce height */
+            }  
+ 
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .spotifyImg{
+            margin-bottom: 300px;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body> 
+    <img src="{{ url_for('static', filename='Spotify_Primary_Logo_RGB_Green.png') }}" width = '100' class = 'spotifyImg'>
+    <p class="text">click dot to login
+        <a href="/login">
+            <button class="loginButton"></button>  
+        </a>
+    </p>
+</body>
+</html>
